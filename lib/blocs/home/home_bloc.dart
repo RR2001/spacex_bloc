@@ -7,21 +7,26 @@ import 'package:spacex_bloc/repository/launch_repository.dart';
 class HomeBloc extends Bloc<HomeEvents, HomeStates> {
   final LaunchRepository repo;
 
-  HomeBloc(this.repo) : super(Loading());
+  HomeBloc(this.repo) : super(NotEnoughChars());
 
-  HomeStates get initialState => Loading();
+  HomeStates get initialState => NotEnoughChars();
 
   @override
   Stream<HomeStates> mapEventToState(HomeEvents event) async* {
     if (event is FetchHomeData) {
-      yield Loading();
-      try {
-        List<Launch> resultList = await repo.fetchLaunches();
-        yield LoadDataSuccess(resultList);
-      } catch (e) {
-        yield LoadDataFail(e.toString());
+      final String searchQuery = event.missionName;
+      if (searchQuery.isEmpty || searchQuery.length < 4) {
+        yield NotEnoughChars();
+      }
+      else{
+        yield Loading();
+        try {
+          List<Launch> resultList = await repo.fetchLaunches(searchQuery);
+          yield LoadDataSuccess(resultList, searchQuery);
+        } catch (e) {
+          yield LoadDataFail(e.toString());
+        }
       }
     }
   }
-
 }

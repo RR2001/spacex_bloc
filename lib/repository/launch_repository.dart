@@ -8,11 +8,11 @@ class LaunchRepository {
   GraphQLService? _service;
 
   LaunchRepository() {
-    _service = GraphQLService('');
+    _service = GraphQLService();
   }
 
-  Future<List<Launch>> fetchLaunches() async {
-    var result = await _service!.performQuery();
+  Future<List<Launch>> fetchLaunches(searchQuery) async {
+    var result = await _service!.performQuery(searchQuery);
 
     if (result.hasException) {
       throw new Exception('Failed to get data');

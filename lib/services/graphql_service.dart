@@ -2,28 +2,26 @@ import 'package:graphql/client.dart';
 
 class GraphQLService {
   GraphQLClient? _client;
-  final String missionName;
 
-  String? _query;
-
-  GraphQLService(this.missionName) {
+  GraphQLService() {
     HttpLink link = HttpLink('https://api.spacex.land/graphql/');
 
     _client =
         GraphQLClient(link: link, cache: GraphQLCache(store: InMemoryStore()));
+  }
 
-    _query = """
+  Future<QueryResult> performQuery(String searchQuery) async {
+
+    String query = """
       query {
-        launches(find: {mission_name: "${this.missionName}"}, limit: 10) {
+        launches(find: {mission_name: "$searchQuery"}, limit: 10) {
         mission_name
         details
         }
       }
       """;
-  }
 
-  Future<QueryResult> performQuery() async {
-    QueryOptions options = QueryOptions(document: gql(_query!));
+    QueryOptions options = QueryOptions(document: gql(query));
 
     final result = await _client!.query(options);
 
