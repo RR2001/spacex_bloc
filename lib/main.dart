@@ -2,23 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_bloc/blocs/home/home_bloc.dart';
 import 'package:spacex_bloc/blocs/home/home_events.dart';
+import 'package:spacex_bloc/repository/launch_repository.dart';
 import 'package:spacex_bloc/screens/home_screen.dart';
 
 void main() {
-  runApp(MyApp());
-}
 
-String query = """
-  query {
-  launches(find: {mission_name: ""}, limit: 10) {
-    mission_name
-    details
-  }
+  final LaunchRepository repository = LaunchRepository();
+
+  runApp(MyApp(repository: repository));
 }
-""";
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  
+  final LaunchRepository repository;
+
+  const MyApp({Key? key, required this.repository}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BlocProvider<HomeBloc>(
-        create: (BuildContext context) => HomeBloc()..add(FetchHomeData(query)),
+        create: (BuildContext context) => HomeBloc(repository)..add(FetchHomeData()),
         child: HomeScreen(),
       ),
     );

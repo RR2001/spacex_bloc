@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:spacex_bloc/models/launch.dart';
 
 abstract class HomeStates extends Equatable {
   HomeStates();
@@ -7,14 +9,14 @@ abstract class HomeStates extends Equatable {
   List<Object> get props => [];
 }
 
-class Loading extends HomeStates {
-  Loading() : super();
-}
+class Loading extends HomeStates {}
+
+class Empty extends HomeStates {}
 
 class LoadDataSuccess extends HomeStates {
-  final dynamic data;
+  final List<Launch> data;
 
-  LoadDataSuccess(this.data) : super();
+  LoadDataSuccess(this.data);
 
   @override
   List<Object> get props => data;
@@ -23,7 +25,7 @@ class LoadDataSuccess extends HomeStates {
 class LoadDataFail extends HomeStates {
   final dynamic error;
 
-  LoadDataFail(this.error) : super();
+  LoadDataFail(this.error);
 
   @override
   List<Object> get props => error;
