@@ -15,7 +15,7 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
   Stream<HomeStates> mapEventToState(HomeEvents event) async* {
     if (event is FetchHomeData) {
       final String searchQuery = event.missionName;
-      if (searchQuery.isEmpty || searchQuery.length < 4) {
+      if (searchQuery.isEmpty || searchQuery.length < 3) {
         yield NotEnoughChars();
       }
       else{

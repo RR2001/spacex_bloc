@@ -19,7 +19,10 @@ class MissionsList extends StatelessWidget {
           );
         }
         if (state is Empty) {
-          return Text('No result');
+          return Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: Text('No missions found'),
+          );
         }
         if (state is NotEnoughChars) {
           return Padding(
@@ -28,11 +31,17 @@ class MissionsList extends StatelessWidget {
           );
         }
         if (state is LoadDataFail) {
-          return Text(state.error);
+          return Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: Text(state.error),
+          );
         }
         if (state is LoadDataSuccess) {
           return state.data.isEmpty
-              ? Text('No result')
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Text('No misssions found'),
+                )
               : Expanded(
                   child: _MissionsListResults(
                     missionList: state.data,
