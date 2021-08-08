@@ -14,8 +14,9 @@ class NotEnoughChars extends HomeStates {}
 
 class LoadDataSuccess extends HomeStates {
   final List<Launch> data;
+  final String missionNameSearch;
 
-  LoadDataSuccess(this.data);
+  LoadDataSuccess(this.data, this.missionNameSearch);
 
   @override
   List<Object> get props => data;

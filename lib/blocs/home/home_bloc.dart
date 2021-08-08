@@ -17,12 +17,11 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
       final String searchQuery = event.missionName;
       if (searchQuery.isEmpty || searchQuery.length < 3) {
         yield NotEnoughChars();
-      }
-      else{
+      } else {
         yield Loading();
         try {
           List<Launch> resultList = await repo.fetchLaunches(searchQuery);
-          yield LoadDataSuccess(resultList);
+          yield LoadDataSuccess(resultList, searchQuery);
         } catch (e) {
           yield LoadDataFail(e.toString());
         }
