@@ -11,6 +11,6 @@ https://api.spacex.land/graphql/
 ## Installing
 
 - Install Google Flutter 2.2.3+
-- Clone or download this repository
+- Clone or download the master branch of this repository
 - Run "flutter pub get" to install packages
 - Run the project on emulator or real device
