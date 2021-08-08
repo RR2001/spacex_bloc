@@ -12,7 +12,6 @@ class GraphQLService {
   }
 
   Future<List<Launch>> performQuery(String searchQuery) async {
-
     String query = """
       query {
         launches(find: {mission_name: "$searchQuery"}, limit: 10) {
@@ -28,6 +27,10 @@ class GraphQLService {
 
     if (result.hasException) {
       throw new Exception('Failed to get data');
+    }
+
+    if (result.data == null) {
+      return [];
     }
 
     List<Launch> resultList = List<Launch>.from(
