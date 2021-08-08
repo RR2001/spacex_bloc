@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:spacex_bloc/blocs/home/home_states.dart';
-
 import 'package:spacex_bloc/models/launch.dart';
 import 'package:spacex_bloc/services/graphql_service.dart';
 
@@ -12,14 +9,7 @@ class LaunchRepository {
   }
 
   Future<List<Launch>> fetchLaunches(searchQuery) async {
-    var result = await _service!.performQuery(searchQuery);
-
-    if (result.hasException) {
-      throw new Exception('Failed to get data');
-    }
-
-    List<Launch> resultList = List<Launch>.from(
-        result.data!['launches'].map((launch) => Launch.fromJson(launch)));
+    List<Launch> resultList = await _service!.performQuery(searchQuery);
 
     return resultList;
   }

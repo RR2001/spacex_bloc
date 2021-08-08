@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spacex_bloc/components/missions_list.dart';
 import 'package:spacex_bloc/components/search_bar.dart';
 
-class SearchScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

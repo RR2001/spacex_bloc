@@ -18,12 +18,6 @@ class MissionsList extends StatelessWidget {
             ),
           );
         }
-        if (state is Empty) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: Text('No missions found'),
-          );
-        }
         if (state is NotEnoughChars) {
           return Padding(
             padding: const EdgeInsets.only(top: 16.0),

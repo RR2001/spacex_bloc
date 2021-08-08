@@ -10,15 +10,12 @@ abstract class HomeStates extends Equatable {
 
 class Loading extends HomeStates {}
 
-class Empty extends HomeStates {}
-
 class NotEnoughChars extends HomeStates {}
 
 class LoadDataSuccess extends HomeStates {
   final List<Launch> data;
-  final String missionNameSearch;
 
-  LoadDataSuccess(this.data, this.missionNameSearch);
+  LoadDataSuccess(this.data);
 
   @override
   List<Object> get props => data;

@@ -1,16 +1,16 @@
 # spacex_bloc
 
-A new Flutter project.
+A Flutter project that uses SpaceX GraphQL API and searches for missions.
 
-## Getting Started
+- The user must be able to type a text to search into the SpaceX missions
+- The search must be done by calling the GraphQL query "launches" filtering by the "mission_name" field exposed by this public backend:
+https://api.spacex.land/graphql/
+- The user should see, as a result of the performed search, a list of items composed by the ***mission_name*** and ***details*** fields as returned by the server.
+- The search should start only for search text longer than 3 characters
 
-This project is a starting point for a Flutter application.
+## Installing
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Install Google Flutter 2.2.3+
+- clone or download this repository
+- Run "flutter pub get" to install packages
+- Run the project on emulator or real device

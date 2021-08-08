@@ -22,7 +22,7 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
         yield Loading();
         try {
           List<Launch> resultList = await repo.fetchLaunches(searchQuery);
-          yield LoadDataSuccess(resultList, searchQuery);
+          yield LoadDataSuccess(resultList);
         } catch (e) {
           yield LoadDataFail(e.toString());
         }

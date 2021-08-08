@@ -1,4 +1,5 @@
 import 'package:graphql/client.dart';
+import 'package:spacex_bloc/models/launch.dart';
 
 class GraphQLService {
   GraphQLClient? _client;
@@ -10,7 +11,7 @@ class GraphQLService {
         GraphQLClient(link: link, cache: GraphQLCache(store: InMemoryStore()));
   }
 
-  Future<QueryResult> performQuery(String searchQuery) async {
+  Future<List<Launch>> performQuery(String searchQuery) async {
 
     String query = """
       query {
@@ -25,6 +26,13 @@ class GraphQLService {
 
     final result = await _client!.query(options);
 
-    return result;
+    if (result.hasException) {
+      throw new Exception('Failed to get data');
+    }
+
+    List<Launch> resultList = List<Launch>.from(
+        result.data!['launches'].map((launch) => Launch.fromJson(launch)));
+
+    return resultList;
   }
 }
